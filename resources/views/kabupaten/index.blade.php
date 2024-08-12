@@ -34,6 +34,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+
 </head>
 
 <body>
@@ -144,9 +148,6 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
                             <a href="{{ route('kabupaten.index') }}"><i class="fa fa-dashboard fa-fw"></i> Data
                                 Kabupaten</a>
                         </li>
@@ -180,9 +181,9 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <a href="{{ route('kabupaten.create') }}" class="btn btn-primary">Tambah</a><br><br>
-                                    <table class="table table-striped table-bordered table-hover"
-                                        id="dataTables-example">
+                                    <a href="{{ route('kabupaten.create') }}"
+                                        class="btn btn-primary">Tambah</a><br><br>
+                                    <table class="table table-striped table-bordered table-hover" id="example">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -193,26 +194,26 @@
                                         <tbody>
                                             @php $no=1; @endphp
                                             @foreach ($kabupaten as $data)
-                                            <tr class="odd gradeX">
-                                                <td>{{ $no++ }}</td>
-                                                <td>{{ $data->nama_kabupaten }}</td>         
-                                                <form action="{{ route('kabupaten.destroy', $data->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <td>
-                                                        <a href="{{ route('kabupaten.edit', $data->id) }}"
-                                                            class="btn  btn-success">Ubah</a>
-                                                        <a href="{{ route('kabupaten.show', $data->id) }}"
-                                                            class="btn  btn-warning">Detail</a>
-                                                        <button class="btn  btn-danger" type="submit"
-                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                            Delete
-                                                        </button>
-                                                    </td>
-                                                </form>
-                                            </tr>
-                                        @endforeach
+                                                <tr class="odd gradeX">
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>{{ $data->nama_kabupaten }}</td>
+                                                    <form action="{{ route('kabupaten.destroy', $data->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <td>
+                                                            <a href="{{ route('kabupaten.edit', $data->id) }}"
+                                                                class="btn  btn-success">Ubah</a>
+                                                            <a href="{{ route('kabupaten.show', $data->id) }}"
+                                                                class="btn  btn-warning">Detail</a>
+                                                            <button class="btn  btn-danger" type="submit"
+                                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                                Delete
+                                                            </button>
+                                                        </td>
+                                                    </form>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -248,12 +249,22 @@
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('asset/js/startmin.js') }}"></script>
 
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#dataTables-example').DataTable({
-                responsive: true
-            });
+        new DataTable('#example', {
+            layout: {
+                topStart: {
+                    buttons: ['pdf', 'excel']
+                }
+            }
         });
     </script>
 

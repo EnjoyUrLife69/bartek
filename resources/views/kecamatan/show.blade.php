@@ -138,9 +138,6 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
                             <a href="{{ route('kabupaten.index') }}"><i class="fa fa-dashboard fa-fw"></i> Data
                                 Kabupaten</a>
                         </li>
