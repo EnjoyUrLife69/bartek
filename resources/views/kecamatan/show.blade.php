@@ -160,7 +160,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Add Data Kabupaten</h1>
+                        <h1 class="page-header">Show Data Kabupaten</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -174,32 +174,27 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <form action="{{ route('kabupaten.update', $kabupaten->id) }}" method="POST"
+                                        <form action="{{ route('kecamatan.store') }}" method="post" role="form"
                                             enctype="multipart/form-data">
                                             @csrf
-                                            @method('PUT')
-                                            @if ($errors->has('nama_kabupaten'))
-                                                <div class="alert alert-danger">
-                                                    {{ $errors->first('nama_kabupaten') }}
-                                                </div>
-                                            @endif
                                             <div class="form-group">
-                                                <label>Nama Kabupaten</label>
-                                                <input class="form-control" name="nama_kabupaten" required
-                                                    value="{{ $kabupaten->nama_kabupaten }}">
+                                                <label>Nama kecamatan</label>
+                                                <input class="form-control" name="nama_kecamatan"
+                                                    placeholder="Nama kecamatan" value="{{ $kecamatan->nama_kecamatan }}"
+                                                    disabled>
                                             </div>
-                                            {{-- <div class="form-group">
-                                                    <label>Selects</label>
-                                                    <select class="form-control">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
+                                            <div class="form-group">
+                                                    <label class="form-label">ID kabupaten</label>
+                                                    <select class="form-control" name="id_kabupaten" disabled>
+                                                        @foreach ($kabupaten as $data)
+                                                            <option value="{{ $data->id }}">
+                                                                {{ $data->nama_kabupaten }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
-                                                </div> --}}
-                                            <button type="submit" class="btn btn-default">Submit</button>
-                                            <a href="{{ url('kabupaten') }}" class="btn btn-primary">Kembali</a>
+                                                    </select>
+                                                </div>
+                                            <a href="{{ url('kecamatan') }}" class="btn btn-primary">Kembali</a>
                                         </form>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->

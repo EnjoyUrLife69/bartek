@@ -38,6 +38,16 @@ class KabupatenController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nama_kabupaten' => 'required|string|max:255|unique:kabupatens',
+        ],
+
+            [
+                'nama_kabupaten.unique' => 'Kabupaten dengan nama tersebut sudah ada sebelumnya.',
+            ]
+
+        );
+
         $kabupaten = new Kabupaten;
         $kabupaten->nama_kabupaten = $request->nama_kabupaten;
         $kabupaten->save();
@@ -80,6 +90,17 @@ class KabupatenController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'nama_kabupaten' => 'required|string|max:255|unique:kabupatens',
+        ],
+
+            [
+                'nama_kabupaten.unique' => 'Kabupaten dengan nama tersebut sudah ada sebelumnya.',
+            ]
+
+        );
+
+        
         $kabupaten = Kabupaten::FindOrFail($id);
         $kabupaten->nama_kabupaten = $request->nama_kabupaten;
         $kabupaten->save();
